@@ -1,0 +1,39 @@
+.service-info-passengers-block {
+    color: #fff;
+    background-color: #64b5f6;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    display: block;
+    font-size: 15px;
+    height: 54px;
+    line-height: 54px;
+    overflow: hidden;
+    padding: 0 20px;
+    position: relative;
+    margin: 0;
+}
+.service-info-passengers-header {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    font-size: 15px;
+    height: 54px;
+    line-height: 54px;
+    overflow: hidden;
+    padding: 0 20px;
+    margin: 0;
+}
+
+.service-info-passengers-header{
+    border: 1px solid #ddd;
+    border-bottom:0;
+    background-color:#fff;
+    margin-bottom:-10px;
+}
+.service-info-passengers-header .img-circle{
+    width:30px;
+    margin-right:10px;
+}
+.service-info-passengers-header a,
+.service-info-passengers-header a:hover{
+    color:#333;
+}

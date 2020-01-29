@@ -1,0 +1,169 @@
+.nemo-common-contentPageBody {
+    background: #ffffff;
+}
+
+.nemo-common-contentPageBody .page-container {
+    padding: 0;
+}
+
+.nemo-common-contentPageBody .nemo-root {
+    background:#63636c;
+}
+
+.nemo-common-contentPageBody .nemo-common-breadCrumbs, #offline-block {
+    padding: 0 20px;
+}
+.nemo-common-contentPageBody .nemo-hotels-bread-crumbs-component {
+    position: absolute;
+    min-width: 100%;
+    top: -60px;
+}
+
+#offline-block {
+    margin-top: 50px;
+}
+
+.nemo-hotels-results__content__results__loadingDummy {
+    padding-top: 10px;
+}
+
+@media (min-width: 770px) {
+
+    .nemo-hotels-results__content__results__loadingDummy {
+        padding-top: auto;
+    }
+
+    .nemo-common-contentPageBody .nemo-hotels-bread-crumbs-component {
+        position: absolute;
+        min-width: 100%;
+        top: 0;
+    }
+
+    #offline-block {
+        margin-top: 60px;
+    }
+}
+
+@media (max-width: 500px) {
+    .nemo-hotels-results__hotelsGroup__header__additional {
+        text-align: right;
+    }
+}
+
+.nemo-hotels-form {
+    margin-top: 0;
+}
+
+.nemo-hotels-results__hotelsGroup__footer__TP_content{
+    position:relative;
+    margin-bottom: -4px;
+}
+.nemo-hotels-results__hotelsGroup__footer__TP_content .bullet_block::before{
+    left:0;
+}
+
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+    font-family: Roboto, "Open Sans", sans-serif;
+    font-size: 13px;
+}
+
+.ui-widget .ui-widget,
+.ui-widget-content {
+    border: none;
+    font-family: Roboto, "Open Sans", sans-serif;
+    font-size: 13px;
+}
+
+.ui-dialog-title, .ui-widget-header {
+    font-weight: normal;
+    font-size: 13px;
+    padding: 10px 60px 10px 20px;
+    line-height: 30px;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    /*padding: 0;*/
+}
+
+.ui-icon {
+    background-image: none;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    border: none;
+}
+
+.ui-dialog__wrapper .ui-dialog {
+    padding: 0;
+}
+
+.nemo-hotels-form__spinner .ui-spinner-input {
+    margin: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-right: 0;
+    border-radius: 0;
+}
+
+.nemo-hotels-form__spinner .ui-spinner-down {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.nemo-ui-slider__wrapper .ui-slider-horizontal .ui-slider-handle {
+    top: 0;
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    background: none;
+    background-color: #fff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .5);
+    margin-left: 0;
+    border-radius: 0 4px 4px 0
+}
+.nemo-ui-slider__wrapper .ui-slider-horizontal .ui-slider-handle:first-of-type {
+    margin-left: -16px;
+    border-radius: 4px 0 0 4px;
+}
+
+.nemo-ui-slider__wrapper .ui-slider-horizontal .ui-slider-handle:after {
+    content: none;
+}
+
+.nemo-ui-slider {
+    background: rgba(100, 100, 100, .75);
+    padding: 0;
+    border-radius: 0;
+}
+
+.nemo-ui-slider .ui-slider-range, .nemo-ui-slider__range {
+    background: #64b5f6;
+    padding: 0;
+    border-radius: 0;
+}
+
+.ui-widget-overlay {
+    background: #000;
+}
+
+.nemo-hotels-form__passengers__fastSelect {
+    display: none;
+}
+
+.nemo-hotels-form__passengers__container {
+    background: #64b5f6 !important;
+    color: #fff;
+}
+
+.nemo-hotels-form__passengers__container.nemo-ui-select__toggle::after {
+    background: #64b5f6;
+}
+
+.nemo-hotels-results__hotelsGroup__footer {
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.nemo-hotel__content__rooms__rating {
+    display: none;
+}

@@ -244,6 +244,19 @@ define(
 			return false;
 		};
 
+		HotelSearchResultsModel.prototype.isPriorityExist = function (hotel) {
+			return !!hotel.priority;
+		};
+
+		HotelSearchResultsModel.prototype.isCorporateOffline = function (hotel) {
+			for (var item in hotel.rooms[0]) {
+				if (hotel.rooms[0].hasOwnProperty(item) && hotel.rooms[0][item].rate.discountId == 'local') {
+					return true;
+				}
+			}
+			return false;
+		};
+
 		/**
 		 * Get distance from center and airport
 		 * @param hotel
@@ -371,6 +384,14 @@ define(
 
 								roomsDictionary[charge.roomId].rate.priceCharges.push(priceCharge);
 								roomsDictionary[charge.roomId].rate.price.add(priceCharge);
+							}
+						});
+					}
+
+					if (room.warnings) {
+						room.warnings.forEach(function (warning) {
+							if (roomsDictionary[warning.roomId]) {
+								roomsDictionary[warning.roomId].warning = warning.text;
 							}
 						});
 					}
@@ -543,6 +564,8 @@ define(
 				hotel.hotelPrice = Math.ceil(hotel.hotelPriceOriginal);
 				hotel.isSpecialOffer = self.isSpecialOfferExist(hotel);
 				hotel.isCorporateRates = self.isСorporateRatesExist(hotel);
+                hotel.isPriority = self.isPriorityExist(hotel);
+                hotel.isCorporateOffline = self.isCorporateOffline(hotel);
 				hotel.hotelChainName = hotel.staticDataInfo.hotelChainName;
 				hotel.priceObservable = self.$$controller.getModel('Common/Money', {
 					amount: firstRoomPrice.amount,
@@ -568,7 +591,7 @@ define(
 			});
 
 			// Get city info from the search info object (new way).
-			if (this.searchInfo && this.searchInfo() && this.searchInfo().segments.length) {
+			if (this.searchInfo && this.searchInfo() && this.searchInfo().segments && this.searchInfo().segments.length) {
 				var cityId = this.searchInfo().segments[0][1];
 
 				if (cityId && this.$$rawdata.guide.cities && this.$$rawdata.guide.cities.hasOwnProperty(cityId)) {
@@ -625,6 +648,13 @@ define(
 					var currentElementRating = currentElement.staticDataInfo.averageCustomerRating,
 						nextElementRating    = nextElement.staticDataInfo.averageCustomerRating;
 
+					if (currentElement.isPriority !== nextElement.isPriority) {
+						return currentElement.isPriority ? -1 : 1;
+					}
+					if (currentElement.isCorporateRates !== nextElement.isCorporateRates) {
+						return currentElement.isCorporateRates ? -1 : 1;
+					}
+
 					if (!currentElementRating) {
 						return 1;
 					}
@@ -643,10 +673,22 @@ define(
 				 * @returns {number}
 				 */
 				var sortHotelsByPrice = function (currentElement, nextElement) {
+					if (currentElement.isPriority !== nextElement.isPriority) {
+						return currentElement.isPriority ? -1 : 1;
+					}
+					if (currentElement.isCorporateRates !== nextElement.isCorporateRates) {
+						return currentElement.isCorporateRates ? -1 : 1;
+					}
 					return currentElement.hotelPrice > nextElement.hotelPrice ? 1 : -1;
 				};
 
 				var sortHotelsByStars = function (currentElement, nextElement) {
+					if (currentElement.isPriority !== nextElement.isPriority) {
+						return currentElement.isPriority ? -1 : 1;
+					}
+					if (currentElement.isCorporateRates !== nextElement.isCorporateRates) {
+						return currentElement.isCorporateRates ? -1 : 1;
+					}
 					return currentElement.staticDataInfo.starRating.length < nextElement.staticDataInfo.starRating.length ? 1 : -1;
 				};
 

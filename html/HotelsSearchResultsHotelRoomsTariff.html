@@ -1,4 +1,6 @@
-<div class="nemo-hotelRoom__tariff" data-bind="css: { 
+<div class="row">
+	<div class="col-xs-12">
+<div class="nemo-hotelRoom__tariff" data-bind="css: {
 	'nemo-hotelRoom__tariff_selected': isSelected(),
 	'nemo-hotelRoom__tariff_disabled': !isSelectable()
 }">
@@ -128,5 +130,21 @@
 			 		'nemo-hotelRoom__tariff__controlWrap__button_withWarning': tariff.rate.availability === 'OnRequest'
 			 	}
 		"></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 nemo-hotels-results__hotelsGroup__footer no-padding-top" data-bind="css: {
+	'nemo-hotelRoom__tariff_selected': isSelected(),
+	'nemo-hotelRoom__tariff_disabled': !isSelectable()
+}">
+		<!--ko if: tariff.warning -->
+		<div class="pl-10 pr-10  text-left">
+			<span class="status-mark bg-orange"></span>
+				<span class="dot nemo-hotels-results__hotelsGroup__footer__TP_header text-orange pointer" data-bind="html: tp_false_link"></span>
+			<div class="nemo-hotels-results__hotelsGroup__footer__TP_content mt-10 hidden-2">
+				<span data-bind="html: tariff.warning"></span>
+			</div>
+		</div>
+		<!--/ko -->
 	</div>
 </div>

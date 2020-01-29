@@ -323,7 +323,7 @@ define(
 			else {
 				url += '?';
 			}
-			url += 'roomIds=' + roomsInfo.join(',') + '&fromApi=true';
+			url += 'room_ids=' + roomsInfo.join(',');
 
 			if (lateCheckOut) {
 				url += '&checkOut=' + lateCheckOut;
@@ -333,37 +333,7 @@ define(
 				url += '&checkIn=' + earlyCheckIn;
 			}
 
-			function processError(error) {
-				error = error || '';
-
-				self.bookingCheckInProgress(false);
-				self.bookingCheckError(error);
-			}
-
-			this.$$controller.loadData(url, {},
-				function (data) {
-					try {
-						data = JSON.parse(data);
-					}
-					catch (e) {
-						processError(self.$$controller.i18n('HotelsSearchResults', 'hotels__bookingCheck__error__error_unavailable'));
-						return;
-					}
-
-					if (data.system.error && data.system.error.message) {
-						processError(data.system.error.message);
-					}
-					else if (data.hotels.search.createOrder.orderURL) {
-						document.location.href = data.hotels.search.createOrder.orderURL;
-					}
-					else {
-						processError(self.$$controller.i18n('HotelsSearchResults', 'hotels__bookingCheck__error__error_unavailable'));
-					}
-				},
-				function () {
-					processError(self.$$controller.i18n('HotelsSearchResults', 'hotels__bookingCheck__error__error_unavailable'));
-				}
-			);
+            document.location.href = url;
 		};
 
 		/**

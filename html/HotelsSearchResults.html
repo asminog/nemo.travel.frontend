@@ -545,7 +545,17 @@
 					<div class="nemo-hotels-results__hotelsGroup__header__additional" data-bind="text: $root.i18n('HotelsSearchResults', 'header-flag__best_price'), visible: $data.hotelPrice == $parent.minHotelPrice && !$data.isSpecialOffer"></div>
 				<!-- /ko -->
 				<!-- ko if: isCorporateRates -->
-					<div class="nemo-hotels-results__hotelsGroup__header__additional" data-bind="text: $root.i18n('HotelsSearchResults', 'header-flag__corporate-rates'), visible: $data.isCorporateRates"></div>
+				<!-- ko if: !isPriority -->
+				<div class="nemo-hotels-results__hotelsGroup__header__additional" data-bind="text: $root.i18n('HotelsSearchResults', 'header-flag__corporate-rates'), visible: $data.isCorporateRates"></div>
+				<!-- /ko -->
+				<!-- ko if: isPriority -->
+				<div class="nemo-hotels-results__hotelsGroup__header__additional nemo-hotels-results__hotelsGroup__header__additional_priority" data-bind="text: t.header_flag__corporate_priority, visible: $data.isPriority"></div>
+				<!-- /ko -->
+				<!-- /ko -->
+				<!-- ko if: !isCorporateRates -->
+				<!-- ko if: isPriority -->
+				<div class="nemo-hotels-results__hotelsGroup__header__additional nemo-hotels-results__hotelsGroup__header__additional_priority" data-bind="text: t.header_flag__corporate_priority, visible: $data.isPriority"></div>
+				<!-- /ko -->
 				<!-- /ko -->
 			</div>
 
@@ -618,6 +628,9 @@
 						</li>
 					</ul>
 				</div>
+				<!-- ko if: isCorporateOffline -->
+				<div class="text-bold text-warning text-uppercase pt-10" data-bind="text: t.header_flag__corporate_offline, visible: $data.isCorporateOffline"></div>
+				<!-- /ko -->
 
 				<!-- ko if: rooms.length && rooms[0] && rooms[0][0].type -->
 				<div class="nemo-hotels-results__hotelsGroup__rooms">
@@ -653,9 +666,20 @@
 				<!-- /ko -->
 
 				<div class="nemo-hotels-results__hotelsGroup__footer">
+                    <div class="mr-15" style="max-width: 50%">
 					<!-- ko if: $root.controller.options.showSupplierName !== undefined ? $root.controller.options.showSupplierName : $root.controller.viewModel.user.isB2B() -->
 					<div class="nemo-hotels-results__hotelsGroup__footer__supplier" data-bind="text: supplier"></div>
 					<!-- /ko -->
+						<!--ko if: $data.warning -->
+						<div class="pt-10 text-left">
+							<span class="status-mark bg-orange"></span>
+							<span class="dot nemo-hotels-results__hotelsGroup__footer__TP_header text-orange pointer" data-bind="html: tp_false_link"></span>
+							<div class="nemo-hotels-results__hotelsGroup__footer__TP_content mt-10 hidden-2">
+								<span data-bind="html: $data.warning"></span>
+							</div>
+						</div>
+						<!--/ko -->
+					</div>
 
 					<div class="nemo-ui-button nemo-ui-button_main nemo-hotels-results__hotelsGroup__footer__orderBtn"
 						 data-bind="click: $parent.showCardHotel">
