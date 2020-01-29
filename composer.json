@@ -1,0 +1,11 @@
+{
+  "name": "asminog/nemo-travel-frontend",
+  "description": "Nemo Search Widget — виджет, встраиваемый на сайт и позволяющий совершать поиск авиабилетов с использованием системы бронирования Nemo.Travel.",
+  "keywords": ["Nemo.Travel", "widget", "js", "travel", "avia", "hotels"],
+  "homepage": "https://github.com/asminog/nemo.travel.frontend",
+  "support": {
+    "issues": "https://github.com/asminog/nemo.travel.frontend/issues",
+    "source": "https://github.com/asminog/nemo.travel.frontend",
+    "docs": "https://github.com/NemoTravel/nemo.travel.frontend/wiki"
+  }
+}
