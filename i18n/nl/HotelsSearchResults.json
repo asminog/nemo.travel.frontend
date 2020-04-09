@@ -1,4 +1,4 @@
-define([],function () {return {
+{
     "hotels__loadingDummy__results__progressText": "hotels__loadingDummy__results__progressText",
     "hotels__loadingDummy__results__progressText_timed": "hotels__loadingDummy__results__progressText_timed",
     "hotels__loadingDummy__filters__title": "hotels__loadingDummy__filters__title",
@@ -55,8 +55,8 @@ define([],function () {return {
     "targetFromAirport": "targetFromAirport",
     "distanceFromCenterText": "distanceFromCenterText",
     "km": "km",
-    "from": "from",
-    "from2": "from2",
+    "from": "van",
+    "from2": "van",
     "to": "to",
     "registration_arrival": "registration_arrival",
     "registration_leaving": "registration_leaving",
@@ -94,9 +94,9 @@ define([],function () {return {
     "tabReviews": "tabReviews",
     "distanceTo": "distanceTo",
     "perNight": "perNight",
-    "back": "Tagasi",
+    "back": "Niet annuleerbaar",
     "checkIn": "checkIn",
-    "checkIn_from": "checkIn_from",
+    "checkIn_from": "van",
     "checkOut": "checkOut",
     "checkOut_until": "checkOut_until",
     "selectFromBeforeCheckoutRoom": "selectFromBeforeCheckoutRoom",
@@ -112,7 +112,7 @@ define([],function () {return {
     "needRequestForAvailabilityCheck_header": "needRequestForAvailabilityCheck_header",
     "needRequestForAvailabilityCheck_desc": "needRequestForAvailabilityCheck_desc",
     "collapse": "collapse",
-    "change": "change",
+    "change": "Wijzig",
     "showAlsoVariants": "showAlsoVariants",
     "variants_one": "variants_one",
     "variants_twoToFour": "variants_twoToFour",
@@ -133,4 +133,4 @@ define([],function () {return {
     "hotels__lateCheckOut__desc": "hotels__lateCheckOut__desc",
     "hotels__earlyCheckIn__header": "hotels__earlyCheckIn__header",
     "hotels__earlyCheckIn__desc": "hotels__earlyCheckIn__desc"
-}});
+}
