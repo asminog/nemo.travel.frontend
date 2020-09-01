@@ -517,8 +517,8 @@ define(
 			
 			// find hotel with max average customer rating
 			function findMaxAverageCustomerRating(hotel) {
-				if (hotel.averageCustomerRating > maxAverageCustomerRating) {
-					maxAverageCustomerRating = hotel.averageCustomerRating;
+				if (hotel.averageCustomerRating.value > maxAverageCustomerRating) {
+					maxAverageCustomerRating = hotel.averageCustomerRating.value;
 				}
 			}
 
@@ -553,6 +553,15 @@ define(
 					hotel.hotelPhotos = [];
 				}
 
+				if (hotel.staticDataInfo.averageCustomerRating) {
+					hotel.averageCustomerRating = hotel.staticDataInfo.averageCustomerRating;
+				} else {
+					hotel.averageCustomerRating = {
+						value: 0,
+						description: ''
+					};
+				}
+
 				hotel.showMap = !!(hotel.staticDataInfo.posLatitude || hotel.staticDataInfo.posLongitude);
 
 				hasCoordinates = hasCoordinates || hotel.showMap;
@@ -578,13 +587,6 @@ define(
 
 				if (hotel.isCorporateRates) {
 					self.isOneHotelWithCorporateFareExists(true);
-				}
-
-				if (!hotel.averageCustomerRating) {
-					hotel.averageCustomerRating = {
-						value: 0,
-						description: ''
-					};
 				}
 
 				hotelsPool[hotel.resultsHotelId] = hotel;

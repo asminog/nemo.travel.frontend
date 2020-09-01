@@ -566,9 +566,23 @@
 					</div>
 
 					<!-- ko if:  staticDataInfo.averageCustomerRating && staticDataInfo.averageCustomerRating.value > 0 -->
+					<a href="#" data-target="" data-bind="attr: { href: staticDataInfo.averageCustomerRating.url , 'data-target': '#hotelRating_'+staticDataInfo.id }" data-toggle="modal">
 					<div class="nemo-hotels-results__hotelsGroup__mainInfo__rating">
 						<span class="nemo-hotels-results__hotelsGroup__mainInfo__rating__number" data-bind="text: staticDataInfo.averageCustomerRating ? staticDataInfo.averageCustomerRating.value : 0"></span>
 						<span class="nemo-hotels-results__hotelsGroup__mainInfo__rating__text" data-bind="text: staticDataInfo.averageCustomerRating && staticDataInfo.averageCustomerRating.description ? staticDataInfo.averageCustomerRating.description : $root.i18n('HotelsSearchResults', 'PH__averageCustomerRating_description_default')"></span>
+					</div>
+					</a>
+					<div class="modal_load_details modal" role="dialog" data-bind="attr: { id: 'hotelRating_'+staticDataInfo.id, 'data-url': staticDataInfo.averageCustomerRating.url } ">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-body">
+									<div class="text-center">
+									<br><br>
+									<img src="/img/loading.gif" class="ajax-loader"/>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<!-- /ko -->
 
@@ -667,9 +681,12 @@
 
 				<div class="nemo-hotels-results__hotelsGroup__footer">
                     <div class="mr-15" style="max-width: 50%">
-					<!-- ko if: $root.controller.options.showSupplierName !== undefined ? $root.controller.options.showSupplierName : $root.controller.viewModel.user.isB2B() -->
-					<div class="nemo-hotels-results__hotelsGroup__footer__supplier" data-bind="text: supplier"></div>
-					<!-- /ko -->
+						<!-- ko if: $root.controller.options.showAgencyName !== undefined ? $root.controller.options.showAgencyName : false -->
+						<div class="nemo-hotels-results__hotelsGroup__footer__supplier" data-bind="text: agency.name"></div>
+						<!-- /ko -->
+						<!-- ko if: $root.controller.options.showSupplierName !== undefined ? $root.controller.options.showSupplierName : $root.controller.viewModel.user.isB2B() -->
+						<div class="nemo-hotels-results__hotelsGroup__footer__supplier" data-bind="text: supplier"></div>
+						<!-- /ko -->
 						<!--ko if: $data.warning -->
 						<div class="pt-10 text-left">
 							<span class="status-mark bg-orange"></span>
