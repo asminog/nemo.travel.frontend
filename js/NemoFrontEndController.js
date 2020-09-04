@@ -76,10 +76,10 @@ define (
 				{
 					re: [
 						// /hotels/results/:search_id?/:hotel_id?
-						/^hotels\/results\/?(\d+)?\/?(\d+|\w+)?$/,
+						/^hotels\/results\/?([\-\:\d]+)?\/?(\d+|\w+)?$/,
 
 						// Fallback
-						/^hotels\/results\/(\d+)\/(\d+|\w+)(\?.*)?$/
+						/^hotels\/results\/([\-\:\d]+)\/(\d+|\w+)(\?.*)?$/
 					],
 					handler: 'Hotels/SearchResults/Controller',
 					params: ['search_id', 'hotel_id']
