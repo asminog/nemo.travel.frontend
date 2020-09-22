@@ -1042,6 +1042,7 @@ define (
 			hotelsTemplateSourceURL: '',
 			corporateHotelsShowcase: false,
 			showSupplierName: undefined,
+			showAgencyName: undefined,
 			createOrderLinkPrefixHotels: null,
 			dataURL: '',
 			staticInfoURL: '',
