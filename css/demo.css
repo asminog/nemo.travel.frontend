@@ -1,0 +1,5 @@
+@import url("custom.css");
+
+.nemo-hotelRoom__tariff__controlWrap, nemo-hotel__content__rooms__footer__wrapper {
+    display: none;
+}

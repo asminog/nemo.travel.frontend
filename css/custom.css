@@ -146,24 +146,7 @@
     background: #000;
 }
 
-.nemo-hotels-form__passengers__fastSelect {
-    display: none;
-}
-
-.nemo-hotels-form__passengers__container {
-    background: #64b5f6 !important;
-    color: #fff;
-}
-
-.nemo-hotels-form__passengers__container.nemo-ui-select__toggle::after {
-    background: #64b5f6;
-}
-
 .nemo-hotels-results__hotelsGroup__footer {
     -ms-flex-pack: justify;
     justify-content: space-between;
-}
-
-.nemo-hotel__content__rooms__rating {
-    display: none;
 }
