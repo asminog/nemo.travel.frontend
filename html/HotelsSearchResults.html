@@ -518,7 +518,7 @@
 <script type="text/html" id="hotelsResultsHotel">
 	<div class="nemo-hotels-results__groupList__item" data-bind="
 		css: {
-			'has-flag': $data.hotelPrice == $parent.minHotelPrice && !$parent.isOneHotelWithCorporateFareExists(),
+			'has-flag': $data.hotelPrice == $parent.minHotelPrice && !$parent.isOneHotelWithCorporateFareExists() || isCorporateRates,
 			'has-flag-specialOffer': $data.isSpecialOffer && !$parent.isOneHotelWithCorporateFareExists()
 		}">
 		<div class="nemo-ui-subContainer
