@@ -48,12 +48,6 @@
     height:50px !important;
 }
 
-@media (max-width: 500px) {
-    .nemo-hotels-results__hotelsGroup__header__additional {
-        text-align: center;
-    }
-}
-
 .nemo-hotels-form {
     margin-top: 0;
 }
