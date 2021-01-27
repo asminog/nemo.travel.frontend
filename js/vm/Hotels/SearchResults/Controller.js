@@ -275,7 +275,7 @@ define(
 			};
 
 			this.makeHotelLink = function (hotel) {
-				return '/hotels/results/' + getSearchId() + '/' + hotel.resultsHotelId;
+				return this.$$controller.options.root + 'hotels/results/' + getSearchId() + '/' + hotel.resultsHotelId;
 			};
 
 			this.getHotelMainImage = function (hotel, defaultImage) {
