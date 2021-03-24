@@ -65,6 +65,7 @@ define([
      * @param map
      * @param {Object} options
      * @param {Object} options.hotel
+     * @param {Object} options.office
      * @param {Boolean} options.addClickListener
      * @param {String} options.iconColor
      */
@@ -76,14 +77,15 @@ define([
 		}
 
         var addClickListener = typeof options.addClickListener === 'undefined' ? false : options.addClickListener,
-            hotel = options.hotel,
             iconType = options.iconColor,
             self = this,
+            posLatitude = typeof options.hotel === 'undefined' ? options.office.posLatitude : options.hotel.staticDataInfo.posLatitude,
+            posLongitude = typeof options.hotel === 'undefined' ? options.office.posLongitude : options.hotel.staticDataInfo.posLongitude,
 
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(
-                    hotel.staticDataInfo.posLatitude,
-                    hotel.staticDataInfo.posLongitude
+                    posLatitude,
+                    posLongitude
                 ),
                 icon: this.getMarkerIcon(iconType),
                 optimized: false,
@@ -98,7 +100,7 @@ define([
         // Add click event on marker
         if (addClickListener) {
             google.maps.event.addListener(marker, 'click', function () {
-                self.infoWindowHotel(hotel);
+                self.infoWindowHotel(options.hotel || options.office);
                 self.infoPopup.setContent($('#infoWindowContentTemplate .mapItem')[0]);
                 self.infoPopup.open(map, marker);
                 $('#infoWindowContent .description .text').dotdotdot({watch: 'window'});
@@ -210,6 +212,7 @@ define([
     GoogleMapModel.prototype.initMap = function () {
         var self = this,
             hotels = this.preFilteredAndSortedHotels ? this.preFilteredAndSortedHotels() : [],
+            offices = this.offices ? this.offices : [],
             inputSearchBox = document.createElement("input"),
             searchBox;
 
@@ -301,7 +304,7 @@ define([
         });
 
         // Add markers on map
-        var bounds = this.addMarkersOnMap(hotels);
+        var bounds = this.addMarkersOnMap(hotels, offices);
 
         if (bounds) {
         	var self = this;
@@ -337,7 +340,7 @@ define([
         });
     };
 
-    GoogleMapModel.prototype.addMarkersOnMap = function (hotels) {
+    GoogleMapModel.prototype.addMarkersOnMap = function (hotels, offices) {
 
 		if (!window.google) {
 			console.warn("Google Maps Library is not included to page. Check API key");
@@ -380,7 +383,27 @@ define([
                     iconColor: iconType
                 }));
 
-             	bounds.extend(new google.maps.LatLng(lat, lon));
+                bounds.extend(new google.maps.LatLng(lat, lon));
+
+                isBounded = true;
+            }
+        });
+        offices.forEach(function (office) {
+
+            var lat = parseFloat(office.posLatitude),
+                lon = parseFloat(office.posLongitude);
+
+            if (!isNaN(lat) && !isNaN(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180) {
+                var iconType = GoogleMapModel.ICON_TYPE_OFFICE;
+                office.isOffice = true;
+                office.staticDataInfo = {addresses: ['']};
+                markers.push(self.makeMarker(self.maps['map'], {
+                    office: office,
+                    addClickListener: true,
+                    iconColor: iconType
+                }));
+
+                bounds.extend(new google.maps.LatLng(lat, lon));
 
                 isBounded = true;
             }
@@ -419,6 +442,7 @@ define([
     GoogleMapModel.ICON_TYPE_BEST_PRICE = 'Pin_Green';
     GoogleMapModel.ICON_TYPE_RECENT_AND_BEST_PRICE = 'Pin_Light-green';
     GoogleMapModel.ICON_TYPE_RECENT = 'Pin_Light-blue';
+    GoogleMapModel.ICON_TYPE_OFFICE = 'Pin_Office';
 
     return GoogleMapModel;
 });

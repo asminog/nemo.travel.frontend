@@ -609,6 +609,7 @@ define(
 				});
 			}
 
+			this.offices = searchData.results.offices;
 			this.hotels = ko.observableArray(hotels);
 			this.hotelsPool = hotelsPool;
 			this.showMaps(hasCoordinates);
@@ -800,7 +801,7 @@ define(
 						self.circle.setRadius(self.distanceFromCenter.rangeMin() * METERS_PER_ONE_KILOMETER); // sets radius in meters
 					}
 
-					var bounds = self.addMarkersOnMap(hotels);
+					var bounds = self.addMarkersOnMap(hotels, self.offices);
 				}
 			}
 
