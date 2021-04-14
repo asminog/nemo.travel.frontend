@@ -186,7 +186,7 @@ define(
 						response.hotels.search.response.id
 					) {
 						resultsId = response.hotels.search.response.id;
-						setTimeout(function(){self.$$controller.loadData('/hotels/search/results/' + resultsId, {}, onSuccess)}, timeout);
+						setTimeout(function(){self.$$controller.loadData('/hotels/search/results/' + resultsId, {}, onSuccess, onError)}, timeout);
 						return;
 					}
 					
@@ -200,7 +200,7 @@ define(
 					}
 
 					resultsId = response.hotels.search.results.id;
-					setTimeout(function(){self.$$controller.loadData('/hotels/search/results/' + resultsId, {}, onSuccess)}, timeout);
+					setTimeout(function(){self.$$controller.loadData('/hotels/search/results/' + resultsId, {}, onSuccess, onError)}, timeout);
 					timeout += 1000;
 				}
 				catch (e) {
@@ -212,7 +212,7 @@ define(
 				url      = searchId ? ('/hotels/search/results/' + searchId) : '/hotels/search/request',
 				postData = searchId ? {} : this.prepareRequestData();
 
-			this.$$controller.loadData(url, postData, onSuccess);
+			this.$$controller.loadData(url, postData, onSuccess, onError);
 		};
 
 		/**
