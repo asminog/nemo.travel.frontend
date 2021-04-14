@@ -111,6 +111,7 @@ define(
 			}
 
 			var onError = function (response) {
+				self.$$rawdata = response;
 				searchError(response.status, response.statusText);
 			}
 
