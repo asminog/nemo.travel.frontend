@@ -994,7 +994,7 @@ define (
 						});
 					});
 
-					matchResults = window.location.pathname.match(/\/results\/(\d+)\/.*/i);
+					matchResults = window.location.pathname.match(/\/results\/(\d+):\d+\/.*/i);
 
 					// Trying to find out search id.
 					if (matchResults instanceof Object && 1 in matchResults) {

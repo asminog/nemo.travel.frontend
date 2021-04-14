@@ -110,6 +110,10 @@ define(
 				}
 			}
 
+			var onError = function (response) {
+				searchError(response.status, response.statusText);
+			}
+
 			var onFinish = function (response) {
 				try {
 					var responseErrorCode = null,
@@ -121,14 +125,26 @@ define(
 						responseErrorCode = response.system.error.code;
 						error = response.system.error;
 					}
-					else if (!self.$$rawdata.hotels.staticDataInfo.hotels) {
+					else if (response.hotels && response.hotels.staticDataInfo && !response.hotels.staticDataInfo.hotels) {
 						responseErrorCode = '404';
 					}
-					else if (response.hotels.search.results.info.errorCode) {
+					else if (
+						response.hotels &&
+						response.hotels.search &&
+						response.hotels.search.results &&
+						response.hotels.search.results.info &&
+						response.hotels.search.results.info.errorCode
+					) {
 						responseErrorCode = response.hotels.search.results.info.errorCode;
 					}
 
-					if (response.hotels.search.results.info.errors) {
+					if (
+						response.hotels &&
+						response.hotels.search &&
+						response.hotels.search.results &&
+						response.hotels.search.results.info &&
+						response.hotels.search.results.info.errors
+					) {
 						self.errorMessageAsIs(response.hotels.search.results.info.errors[0]);
 					}
 
