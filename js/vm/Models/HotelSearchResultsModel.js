@@ -74,10 +74,10 @@ define(
 					}
 				}
 			});
-			
+
 			var checkInDate = this.$$controller.getModel('Common/Date', segment[KEY_CHECK_IN_DATE]),
 				checkOutDate = this.$$controller.getModel('Common/Date', segment[KEY_CHECK_OUT_DATE]);
-			
+
 			requestData.request = JSON.stringify({
 				cityId: segment[KEY_CITY_ID],
 				checkInDate: checkInDate.getISODateTime(),
@@ -112,8 +112,8 @@ define(
 
 			var onError = function (response) {
 				self.$$rawdata = response;
-				searchError(response.status, response.statusText);
-			}
+				searchError('systemError', [response.status, response.statusText]);
+			};
 
 			var onFinish = function (response) {
 				try {
@@ -172,28 +172,28 @@ define(
 					console.error(e);
 				}
 			};
-			
+
 			var onSuccess = function (json) {
 				try {
 					var response          = JSON.parse(json),
 						responseErrorCode = null,
 						error,
 						resultsId;
-						
+
 					self.$$rawdata = response;
-					
+
 					if (!(response.system && response.system.error) &&
-						response.hotels.search.response && 
+						response.hotels.search.response &&
 						response.hotels.search.response.id
 					) {
 						resultsId = response.hotels.search.response.id;
 						setTimeout(function(){self.$$controller.loadData('/hotels/search/results/' + resultsId, {}, onSuccess, onError)}, timeout);
 						return;
 					}
-					
+
 					if((response.system && response.system.error) ||
 						!response.hotels.search.results ||
-						response.hotels.search.results.isFinished === undefined || 
+						response.hotels.search.results.isFinished === undefined ||
 						response.hotels.search.results.isFinished
 					){
 						onFinish(response);
@@ -228,7 +228,7 @@ define(
 				if (!currency) {
 					currency = tariffs[0].rate.price.currency();
 				}
-				
+
 				price += tariffs[0].rate.price.amount();
 			});
 
@@ -323,14 +323,14 @@ define(
 		function compareObjects(firstArray, secondArray, propertyFirst, propertySecond) {
 			var data = secondArray.slice(0),
 				firstObject = {};
-			
+
 			for (var i = 0; i < firstArray.length; i++) {
 				firstObject[firstArray[i].id] = firstArray[i];
 			};
-			
+
 			for (var j = 0; j < secondArray.length; j++) {
 				var property = secondArray[j][propertyFirst];
-				
+
 				if (property in firstObject) {
 					data[j][propertySecond] = firstObject[property];
 				}
@@ -445,7 +445,7 @@ define(
 				maxAverageCustomerRating = 0,
 				MILLISECONDS_IN_DAY = 86400000,
 				$body               = $('body');
-			
+
 			if (googleMapKey && !$body.find('.js-googleMapScript').length) {
 				self.$$controller.viewModel.user.settings.googleMapsApiKey(googleMapKey);
 				$body.append('<script class="js-googleMapScript" src="//maps.googleapis.com/maps/api/js?key=' + googleMapKey + '&libraries=places"></script>');
@@ -482,7 +482,7 @@ define(
 			searchData.results.roomsGroup = compareObjects(searchData.results.roomTypes, searchData.results.roomsGroup, 'typeId', 'type');
 			searchData.results.roomsGroup = searchData.results.roomsGroup.map(function (tariff) {
 				var tariffModel;
-				
+
 				if (tariff instanceof TariffModel) {
 					tariffModel = tariff;
 				}
@@ -491,7 +491,7 @@ define(
 				}
 
 				tariffModel.fixPriceIfNeeded();
-				
+
 				return tariffModel;
 			});
 
@@ -515,7 +515,7 @@ define(
 					}
 				}
 			}
-			
+
 			// find hotel with cheapest price
 			function findCheapestHotel(hotel) {
 				if (hotel.hotelPrice < minHotelPrice) {
@@ -531,7 +531,7 @@ define(
 					maxHotelPrice = hotel.hotelPrice;
 				}
 			}
-			
+
 			// find hotel with max average customer rating
 			function findMaxAverageCustomerRating(hotel) {
 				if (hotel.averageCustomerRating.value > maxAverageCustomerRating) {
@@ -542,7 +542,7 @@ define(
 			var hotels = this.addHotelsRooms(searchData.results);
 			var hotelsPool = {};
 			var hasCoordinates = false;
-			
+
 			hotels.map(function (hotel, index) {
 				hotel.staticDataInfo.featuresArray = [];
 
@@ -639,11 +639,11 @@ define(
 			this.countOfNights = ko.observable(
 				Math.floor((new Date(searchData.request.checkOutDate) - new Date(searchData.request.checkInDate)) / MILLISECONDS_IN_DAY)
 			);
-			
+
 			this.maxAverageCustomerRating = ko.observable(maxAverageCustomerRating);
 
 			this.filters = new HotelsFiltersViewModel(ko, minHotelPrice, maxHotelPrice);
-			
+
 			this.averageCustomerRatingComputed = ko.pureComputed(function () {
 				if (self.maxAverageCustomerRating() === 0) {
 					self.filters.sortTypes = [HotelsBaseModel.SORT_TYPES.BY_PRICE, HotelsBaseModel.SORT_TYPES.BY_STARS];
@@ -651,7 +651,7 @@ define(
 				}
 			});
 			this.initialAverageCustomerRating = this.averageCustomerRatingComputed();
-			
+
 			/**
 			 * Returns sorted hotels
 			 */
@@ -913,7 +913,7 @@ define(
 						featureFilterValues[feature].count++;
 					});
 				});
-				
+
 				this.filters.featureFilter.setFilterValues(featureFilterValues);
 
 			}, this);
@@ -944,7 +944,7 @@ define(
 					specialConditions = {specialOffer : 0, corporateRates: 0},
 					hotels = self.getHotelsExceptFeatureFilter(),
 					resultSpecialValues = {};
-					
+
 					hotels.forEach(function (hotel) {
 						if(self.isSpecialOfferExist(hotel)) {
 							specialConditions.specialOffer++;
@@ -962,7 +962,7 @@ define(
 					if (specialConditions.corporateRates > 0) {
 						resultSpecialValues['CorporateRates'] = {id: 'isCorporateRates', name: this.$$controller.i18n('HotelsSearchResults','header-flag__corporate-rates'), count: specialConditions.corporateRates};
 					}
-					
+
 					this.filters.specialFilter.setFilterValues(resultSpecialValues);
 			}, this);
 
