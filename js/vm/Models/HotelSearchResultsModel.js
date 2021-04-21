@@ -169,7 +169,7 @@ define(
 
 				}
 				catch (e) {
-					onError({});
+					onError(response);
 					console.error(e);
 				}
 			};
@@ -206,6 +206,7 @@ define(
 					timeout += 1000;
 				}
 				catch (e) {
+					onError({status: 500, statusText: e.name + ': ' + e.message});
 					console.error(e);
 				}
 			};
