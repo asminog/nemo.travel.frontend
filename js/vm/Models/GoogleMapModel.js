@@ -388,6 +388,7 @@ define([
                 isBounded = true;
             }
         });
+		offices = offices || [];
         offices.forEach(function (office) {
 
             var lat = parseFloat(office.posLatitude),

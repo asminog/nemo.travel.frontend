@@ -169,6 +169,7 @@ define(
 
 				}
 				catch (e) {
+					onError({});
 					console.error(e);
 				}
 			};
@@ -626,7 +627,7 @@ define(
 				});
 			}
 
-			this.offices = searchData.results.offices;
+			this.offices = searchData.results.offices || [];
 			this.hotels = ko.observableArray(hotels);
 			this.hotelsPool = hotelsPool;
 			this.showMaps(hasCoordinates);
